@@ -1,17 +1,6 @@
 ---
 
-let marcas = [];
-
-// Obtener las marcas desde la API
-const fetchMarcas = async () => {
-  const response = await fetch('http://localhost:3000/api/marcas');
-  if (response.ok) {
-    marcas = await response.json();
-  }
-};
-
-// Llamar a la función para obtener las marcas
-await fetchMarcas();
+const { marcas } = Astro.props;
 ---
 
 <h1>Marcas Disponibles</h1>

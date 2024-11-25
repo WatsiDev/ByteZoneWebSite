@@ -1,16 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import Header from '../components/Header.astro';
 import Categorias from '../components/Categorias.astro';
-import ListProducts from '../components/ListProducts.astro';
+
+import { fetchListProducts } from '../ApiServices/ProductServices';
+import ProductList from '../components/ProductList.astro';
+
+// Obtener los productos desde la API
+const products = await fetchListProducts();
 ---
 
 <Layout title="ByteZone-Tienda online">
-	
-
-	<main class="bg-slate-800 text-white">
-		<Header/>
+	<main>
 		<div class="grid grid-cols-[1fr_3fr] gap-3 p-2">
 			<aside class="bg-slate-700 p-3 h-2/4 mt-7">
 				<h3 class="text-center">Categorias</h3>
@@ -18,7 +19,7 @@ import ListProducts from '../components/ListProducts.astro';
 			</aside>
 			<div class="ml-3 text-center mt-7">
 				<div>
-					<ListProducts/>
+					<ProductList products={products} />
 				</div>
 			</div>
 		</div>

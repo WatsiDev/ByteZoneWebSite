@@ -1,0 +1,164 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { fetchModelos } from "../ApiServices/ModeloServices.js";
+import { fetchSubcategorias } from "../ApiServices/SubcategoriaServices.js";
+import { fetchCategorias } from "../ApiServices/CategoriaServices.js";
+
+const categorias = await fetchCategorias();
+const subcategorias = await fetchSubcategorias();
+const modelos = await fetchModelos();
+---
+
+<Layout title="Add product">
+  <main>
+    <form id="productoForm" method="POST" onsubmit="handleFormSubmit(event)">
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-3">
+        <div class="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <p class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+              Nuevo producto
+            </p>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                URL de la imagen
+              </label>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="imagen"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Descripción
+              </label>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="descripcion"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Precio
+              </label>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="precio"
+                type="number"
+                step="0.01"
+                required
+              />
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Cantidad en stock
+              </label>
+              <input
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="cantidad_en_stock"
+                type="number"
+                required
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Modelo
+              </label>
+              <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="modelo_id"
+                required
+              >
+                {modelos.map((modelo) => (
+                  <option value={modelo.modelo_id}>{modelo.ModeloName}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Categoría
+              </label>
+              <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="categoria_id"
+                required
+              >
+                {categorias.map((categoria) => (
+                  <option value={categoria.categoria_id}>
+                    {categoria.CategoriaName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900">
+                Subcategoría
+              </label>
+              <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                name="subcategoria_id"
+                required
+              >
+                {subcategorias.map((subcategoria) => (
+                  <option value={subcategoria.subcategoria_id}>
+                    {subcategoria.SubcategoriaName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              class="w-full bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:ring-blue-800 text-white"
+              type="submit"
+              id="submitButton"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Script para manejar el envío del formulario -->
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("productoForm");
+    
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+    
+          const formData = new FormData(form);
+          const producto = Object.fromEntries(formData.entries());
+    
+          try {
+            const response = await fetch("http://localhost:3000/api/addproductos", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(producto),
+            });
+    
+            if (response.ok) {
+              const data = await response.json();
+              alert("Producto agregado exitosamente: " + data.producto_id);
+              form.reset();
+            } else {
+              alert("Error al agregar producto.");
+            }
+          } catch (error) {
+            console.error("Error de red:", error);
+            alert("Error al conectar con la API.");
+          }
+        });
+      });
+    </script>
+    
+  </main>
+</Layout>

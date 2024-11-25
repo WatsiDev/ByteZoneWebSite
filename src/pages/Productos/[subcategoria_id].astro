@@ -1,6 +1,5 @@
 ---
 import Categorias from "../../components/Categorias.astro";
-import Header from "../../components/Header.astro";
 import Shop from "../../components/shop.astro";
 import Layout from "../../layouts/Layout.astro";
 
@@ -28,8 +27,6 @@ const productos = await fetchProductos(subcategoria_id);
 
 <Layout title="Productos">
     <main class="bg-slate-800 text-white">
-        <Header/>
-
         <div class="grid grid-cols-[1fr_3fr] gap-3 p-2">
 			<aside class="bg-slate-700 p-3 h-screen mt-7">
 				<h3 class="text-center">Categorias</h3>

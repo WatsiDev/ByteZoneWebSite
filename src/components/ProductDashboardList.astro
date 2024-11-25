@@ -1,0 +1,14 @@
+---
+// src/components/ProductList.astro
+import ProductDashboard from "./ProductDashboard.astro";
+
+const { products } = Astro.props;
+---
+
+<div>
+  {products.length > 0 ? (
+    products.map((product) => <ProductDashboard product={product} />)
+  ) : (
+    <p>No hay productos disponibles</p>
+  )}
+</div>

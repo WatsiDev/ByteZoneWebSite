@@ -4,7 +4,7 @@ import Card from '../components/Card.astro';
 import Categorias from '../components/Categorias.astro';
 
 import { fetchListProducts } from '../ApiServices/ProductServices';
-import ProductList from '../components/ProductList.astro';
+import ProductList from '../components/ProductList';
 
 // Obtener los productos desde la API
 const products = await fetchListProducts();

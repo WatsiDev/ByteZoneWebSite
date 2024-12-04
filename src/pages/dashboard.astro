@@ -1,26 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { fetchListProducts } from '../ApiServices/ProductServices';
-import ProductDashboardList from '../components/ProductDashboardList.astro';
+import ProductDashboardList from '../components/ProductDashboardList';
+import ProductCardJSX from '../components/ProductDashboard';
 
-
-// Obtener los productos desde la API
 const products = await fetchListProducts();
 ---
 
 <Layout title="Dashboard">
-	<main class="bg-slate-800 text-white">
-	<div class="flex justify-center">
-		<h3 class=" font-bold text-6xl p-6">Dashboard</h3>
-	</div>
-		<section class="my-4">
-			<button
+  <main class="bg-slate-800 text-white">
+    <div class="flex justify-center">
+      <h3 class="font-bold text-6xl p-6">Dashboard</h3>
+    </div>
+    <section class="my-4">
+      <button
         type="button"
         class="bg-cyan-400 mt-4 mx-auto p-2 rounded-lg hover:bg-black flex items-center justify-center gap-2 active:scale-95"
       >
         <a href="/NewProducts">Nuevos productos</a>
       </button>
-		</section>
-        <ProductDashboardList  products={products} />
-	</main>
+    </section>
+    <ProductDashboardList products={products} client:load />
+  </main>
 </Layout>

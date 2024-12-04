@@ -1,11 +1,9 @@
 ---
-import Subcategorias from "./Subcategorias.astro";
-
 let categorias = [];
 
 // Obtener las marcas desde la API
 const fetchCategorias = async () => {
-  const response = await fetch("http://localhost:3000/api/categorias");
+  const response = await fetch("http://localhost:3000/categorias");
   if (response.ok) {
     categorias = await response.json();
   }
@@ -21,14 +19,12 @@ await fetchCategorias();
     categorias.length > 0 ? (
       categorias.map((categorias) => (
         <li class="pt-1">
-          <p>🔻{categorias.CategoriaName}</p>
-    
-            <Subcategorias id={categorias.categoria_id}/>
+          <p class="">{categorias.Categoria}</p>
           
         </li>
       ))
     ) : (
-      <li>No hay marcas disponibles</li>
+      <li>No hay categorias disponibles</li>
     )
   }
 </ul>

@@ -5,7 +5,7 @@ let products = [];
 
 // Obtener las marcas desde la API
 const fetchListProducts = async () => {
-  const response = await fetch("http://localhost:3000/api/listProducts");
+  const response = await fetch("http://localhost:3000/productos");
   if (response.ok) {
     products = await response.json();
   }
@@ -18,18 +18,18 @@ await fetchListProducts();
 <!-- Listar categorias -->{
   products.length > 0 ? (
     products.map((products) => (
-      <div class="bg-slate-600 m-2 grid grid-cols-4 rounded-md">
-        <img src={products.imagen} alt="imagen del producto" />
+      <div class="bg-slate-600 m-2 grid grid-cols-4 rounded-md h-60">
+        <img class="h-60" src={products.Imagen} alt="imagen del producto" />
 
         <div class="col-span-3 p-3">
-          <p>{products.descripcion}</p>
+          <p>{products.Descripcion}</p>
 
           <div class="grid grid-cols-2 p-4">
             <p class="text-start"> </p>
 
-            <p class="text-end">Disponibles: {products.cantidad_en_stock}</p>
+            <p class="text-end">Disponibles: {products.Stock}</p>
 
-            <p class="text-end col-span-2">Precio: ${products.precio}</p>
+            <p class="text-end col-span-2">Precio: ${products.Precio}</p>
 
             <button
               type="button"
@@ -37,12 +37,12 @@ await fetchListProducts();
             >
               <Shop class="w-5 h-5" />
               Buy
-            </button>
+            </button> 
           </div>
         </div>
       </div>
     ))
   ) : (
-    <p>No hay marcas disponibles</p>
+    <p>No hay producto disponibles</p>
   )
 }

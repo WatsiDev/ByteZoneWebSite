@@ -37,6 +37,9 @@ La integración con Stripe está configurada en modo de prueba. Puedes usar las 
 https://docs.stripe.com/testing?testing-method=card-numbers#cards
 
 - *Tarjeta de crédito válida*:
-	-Número de tarjeta: 4242 4242 4242 4242
-	-Fecha de vencimiento: cualquier fecha futura.
-	-Código de seguridad: cualquier valor de 3 dígitos.
+
+   - Número de tarjeta: 4242 4242 4242 4242
+
+   - Fecha de vencimiento: cualquier fecha futura.
+
+   - Código de seguridad: cualquier valor de 3 dígitos.

@@ -108,17 +108,28 @@ const ProductForm: React.FC<{ product?: Product; onSuccess: () => void }> = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 text-black">
-      <input
-        type="text"
-        name="Descripcion"
-        value={formData.Descripcion}
-        onChange={handleChange}
-        placeholder="Product description"
-        className="border p-2 w-full"
-        required
-      />
+      {/* Descripción */}
+  <div>
+    <label htmlFor="Descripcion" className="block text-sm font-semibold">Descripción</label>
+    <input
+      type="text"
+      id="Descripcion"
+      name="Descripcion"
+      value={formData.Descripcion}
+      onChange={handleChange}
+      placeholder="Product description"
+      className="border p-2 w-full"
+      required
+    />
+  </div>
+
+  <div className="grid grid-cols-2 gap-4"> {/* Se usa grid para dos columnas */}
+    {/* Precio */}
+    <div>
+      <label htmlFor="Precio" className="block text-sm font-semibold">Precio</label>
       <input
         type="number"
+        id="Precio"
         name="Precio"
         value={formData.Precio}
         onChange={handleChange}
@@ -126,8 +137,14 @@ const ProductForm: React.FC<{ product?: Product; onSuccess: () => void }> = ({
         className="border p-2 w-full"
         required
       />
+    </div>
+
+    {/* Stock */}
+    <div>
+      <label htmlFor="Stock" className="block text-sm font-semibold">Stock</label>
       <input
-        type="text"
+        type="number"
+        id="Stock"
         name="Stock"
         value={formData.Stock}
         onChange={handleChange}
@@ -135,41 +152,66 @@ const ProductForm: React.FC<{ product?: Product; onSuccess: () => void }> = ({
         className="border p-2 w-full"
         required
       />
-      <input
-        type="text"
-        name="Marca"
-        value={formData.Marca}
-        onChange={handleChange}
-        placeholder="Marca"
-        className="border p-2 w-full"
-        required
-      />
-      <select
-        name="Categoria_id"
-        value={formData.Categoria_id}
-        onChange={handleChange}
-        className="border p-2 w-full"
-        required
-      >
-        <option value="">Select Category</option>
-        {categories.map((category) => (
-          <option key={category.Categoria_id} value={category.Categoria_id}>
-            {category.Categoria}
-          </option>
-        ))}
-      </select>
-      <input
-        type="text"
-        name="Imagen"
-        value={formData.Imagen}
-        onChange={handleChange}
-        placeholder="URL imagen"
-        className="border p-2 w-full"
-        required
-      />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2">
-        {product?.Producto_id ? "Update" : "Add"} Product
-      </button>
+    </div>
+  </div>
+
+
+  {/* Marca */}
+  <div>
+    <label htmlFor="Marca" className="block text-sm font-semibold">Marca</label>
+    <input
+      type="text"
+      id="Marca"
+      name="Marca"
+      value={formData.Marca}
+      onChange={handleChange}
+      placeholder="Marca"
+      className="border p-2 w-full"
+      required
+    />
+  </div>
+
+  {/* Categoría */}
+  <div>
+    <label htmlFor="Categoria_id" className="block text-sm font-semibold">Categoría</label>
+    <select
+      name="Categoria_id"
+      id="Categoria_id"
+      value={formData.Categoria_id}
+      onChange={handleChange}
+      className="border p-2 w-full"
+      required
+    >
+      <option value="">Select Category</option>
+      {categories.map((category) => (
+        <option key={category.Categoria_id} value={category.Categoria_id}>
+          {category.Categoria}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  {/* Imagen */}
+  <div>
+    <label htmlFor="Imagen" className="block text-sm font-semibold">URL de Imagen</label>
+    <input
+      type="text"
+      id="Imagen"
+      name="Imagen"
+      value={formData.Imagen}
+      onChange={handleChange}
+      placeholder="URL imagen"
+      className="border p-2 w-full"
+      required
+    />
+  </div>
+
+  {/* Botón de envío */}
+  <div>
+    <button type="submit" className="bg-blue-500 text-white px-4 py-2">
+      {product?.Producto_id ? "Update" : "Add"} Product
+    </button>
+  </div>
     </form>
   );
 };

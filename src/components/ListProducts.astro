@@ -3,7 +3,7 @@ import Shop from "./shop.astro";
 
 let products = [];
 
-// Obtener las marcas desde la API
+// Obtener los productos desde la API
 const fetchListProducts = async () => {
   const response = await fetch("http://localhost:3000/productos");
   if (response.ok) {
@@ -11,38 +11,38 @@ const fetchListProducts = async () => {
   }
 };
 
-// Llamar a la función para obtener las categorias
+// Llamar a la función para obtener los productos
 await fetchListProducts();
 ---
 
-<!-- Listar categorias -->{
-  products.length > 0 ? (
-    products.map((products) => (
+<!-- Listar productos -->
+<div class="p-4">
+  {products.length > 0 ? (
+    products.map((product) => (
       <div class="bg-slate-600 m-2 grid grid-cols-4 rounded-md h-60">
-        <img class="h-60" src={products.Imagen} alt="imagen del producto" />
+        <img class="h-60 object-cover" src={product.Imagen} alt="imagen del producto" />
 
         <div class="col-span-3 p-3">
-          <p>{products.Descripcion}</p>
+          <p class="font-bold text-lg text-white">{product.Descripcion}</p>
 
-          <div class="grid grid-cols-2 p-4">
+          <div class="grid grid-cols-2 p-4 text-white">
             <p class="text-start"> </p>
+            <p class="text-end">Disponibles: {product.Stock}</p>
+            <p class="text-end col-span-2">Precio: ${product.Precio}</p>
 
-            <p class="text-end">Disponibles: {products.Stock}</p>
-
-            <p class="text-end col-span-2">Precio: ${products.Precio}</p>
-
+            <!-- Botón de pago que redirige a la página de pago con el ID del producto -->
             <a
-              href="payment"
+              href={`/payment/${product.Producto_id}`}
               class="bg-cyan-400 ml-auto col-start-2 mt-4 py-2 rounded-lg hover:bg-black w-1/2 flex items-center justify-center gap-2 active:scale-95"
             >
               <Shop class="w-5 h-5" />
-              Buy
-            </a> 
+              Comprar
+            </a>
           </div>
         </div>
       </div>
     ))
   ) : (
-    <p>No hay producto disponibles</p>
-  )
-}
+    <p class="text-center text-white">No hay productos disponibles</p>
+  )}
+</div>

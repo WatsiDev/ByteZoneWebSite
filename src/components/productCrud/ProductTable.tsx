@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listProducts, deleteProduct } from '../apiServices/apiService';
+import { listProducts, deleteProduct } from '../../apiServices/apiService';
 
 interface Product {
     Producto_id: number,

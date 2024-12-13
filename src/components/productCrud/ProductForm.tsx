@@ -3,7 +3,7 @@ import {
   addProduct,
   editProduct,
   listCategorias,
-} from "../apiServices/apiService";
+} from "../../apiServices/apiService";
 
 interface Product {
   Producto_id?: number;

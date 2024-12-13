@@ -1,0 +1,35 @@
+---
+import CheckoutForm from "../../components/CheckoutForm";
+import Layout from "../../layouts/Layout.astro";
+// Obtener los parámetros dinámicos de la URL
+const { id } = Astro.params;
+
+// Lógica para obtener los datos del producto desde la API
+let product = null;
+
+try {
+  const response = await fetch(`http://localhost:3000/productos/${id}`);
+  if (response.ok) {
+    product = await response.json();
+  } else {
+    throw new Error("Producto no encontrado");
+  }
+} catch (error) {
+  console.error(error);
+}
+---
+
+<Layout title="Payment">
+  <!-- Renderizar el formulario de pago -->
+  <div class="flex flex-col items-center justify-center min-h-screen gap-2">
+    <h2 class="font-bold text-3xl mb-6 text-center">Realice su compra a crédito o débito.</h2>
+    <div class="w-full max-w-md py-8">
+      {product ? (
+        <CheckoutForm price={product.Precio} />
+      ) : (
+        <p class="text-red-500 text-center">Producto no encontrado.</p>
+      )}
+    </div>
+  </div>
+</Layout>
+

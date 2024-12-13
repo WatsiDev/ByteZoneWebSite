@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DashboardButton from "../components/dashboardButton.astro";
+import Users from "../components/usersCrud/users";
+
+---
+<Layout title="Dashboard">
+    <main>
+        <div class="w-40 m-4">
+            <DashboardButton rute="dashboard" BtnLabel="Productos" />
+        </div>
+        <Users client:load/>
+    </main>
+</Layout>

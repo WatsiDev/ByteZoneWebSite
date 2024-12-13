@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DashboardReact from "../components/productCrud/dashboard";
+import DashboardButton from "../components/dashboardButton.astro";
+---
+
+<Layout title="Dashboard">
+  <main>
+    <div class="w-40 m-4">
+        <DashboardButton rute="usuarios", BtnLabel="Usuarios" />
+    </div>
+    <DashboardReact client:load />
+  </main>
+</Layout>
